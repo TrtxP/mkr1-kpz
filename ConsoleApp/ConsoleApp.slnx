@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/Solution Items/" />
+  <Project Path="ClassLibraryStructurePatterns/ClassLibraryStructurePatterns.csproj" />
+  <Project Path="ConsoleApp/ConsoleApp.csproj" />
+</Solution>
