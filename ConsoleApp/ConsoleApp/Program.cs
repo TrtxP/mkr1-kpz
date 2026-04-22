@@ -7,6 +7,8 @@ using ClassLibraryStructurePatterns.Decorator.Characters;
 using ClassLibraryStructurePatterns.Decorator.Inventory;
 using ClassLibraryStructurePatterns.Flyweight;
 using ClassLibraryStructurePatterns.Proxy;
+using BenchmarkDotNet.Running;
+using ConsoleApp;
 using System.Text;
 
 class Program
@@ -26,17 +28,21 @@ class Program
         logger.Log("Це звиччайне повідомлення");
         logger.Error("Це повідомлення про помилку");
         logger.Warn("Це попереджувальне повідомлення");
-        Console.WriteLine(new string('-', 50));
+        Console.WriteLine(new string('-', 30));
 
-        FileLogger fileLogger = new FileLogger("C:\\" +
+        Logger fileLogger = new FileLogger("C:\\" +
                                                     "Users\\Ilya\\Desktop\\" +
                                                     "Предмети з Житомирської політехи\\" +
                                                     "Конструювання ПЗ\\lab3\\ConsoleApp\\" +
                                                     "ConsoleApp\\FileWritingTesting\\logs.txt");
 
+        // Відображаємо записані дані у файлі
+
+        Console.WriteLine("Записані дані у файлі logs.txt:");
         fileLogger.Log("Звичайне повідомлення");
         fileLogger.Error("Повідомлення про помилку");
         fileLogger.Warn("Попереджувальне повідомлення");
+        Console.WriteLine(new string('-', 50));
 
         // Демонстрування роботи шаблону декоратор
 
@@ -45,27 +51,39 @@ class Program
         Console.WriteLine(new string('-', 50));
 
         ICharacter mage = new Mage();
-        mage = new Armor(mage);
+        mage = new Clothing(mage);
+        mage = new Clothing(mage);
+        mage = new Artefact(mage);
         mage = new Artefact(mage);
         Console.WriteLine(mage.GetDescription());
         Console.WriteLine($"Атака: {mage.GetAttack()}");
+        Console.WriteLine($"Захист: {mage.GetDefence()}");
+        Console.WriteLine($"Магія: {mage.GetMagic()}");
 
         Console.WriteLine();
 
         ICharacter palladin = new Palladin();
         palladin = new Sword(palladin);
-        palladin = new Armor(palladin);
+        palladin = new Sword(palladin);
+        palladin = new Clothing(palladin);
+        palladin = new Artefact(palladin);
         palladin = new Artefact(palladin);
         Console.WriteLine(palladin.GetDescription());
         Console.WriteLine($"Атака: {palladin.GetAttack()}");
+        Console.WriteLine($"Захист: {palladin.GetDefence()}");
+        Console.WriteLine($"Магія: {palladin.GetMagic()}");
 
         Console.WriteLine();
 
         ICharacter warrior = new Warrior();
         warrior = new Sword(warrior);
-        warrior = new Armor(warrior);
+        warrior = new Sword(warrior);
+        warrior = new Clothing(warrior);
+        warrior = new Clothing(warrior);
         Console.WriteLine(warrior.GetDescription());
         Console.WriteLine($"Атака: {warrior.GetAttack()}");
+        Console.WriteLine($"Захист: {warrior.GetDefence()}");
+        Console.WriteLine($"Магія: {warrior.GetMagic()}");
 
         Console.WriteLine(new string('-', 50));
 
@@ -149,18 +167,14 @@ class Program
 
         Console.WriteLine("Демонстрація роботи шаблону легковаговик");
 
-        var client = new HttpClient();
-        var url = "https://www.gutenberg.org/cache/epub/1513/pg1513.txt";
-        var bookText = client.GetStringAsync(url).Result;
-
         Console.WriteLine(new string('-', 50));
 
         Console.WriteLine("Конвертування змісту книжки у HTML формат\nз використанням шаблону легковаговик");
         Console.WriteLine(new string('-', 50));
 
-        GC.Collect();
-
-        long memoryBefore = GC.GetTotalMemory(true);
+        var client = new HttpClient();
+        var url = "https://www.gutenberg.org/cache/epub/1513/pg1513.txt";
+        var bookText = client.GetStringAsync(url).Result;
 
         var factory = new LightElementFactory();
         var root = new LightElementNodeWithInfo(factory.GetElementInfo("div", DisplayType.Block, ClosingType.Normal));
@@ -196,60 +210,9 @@ class Program
             root.AppendChild(node);
         }
 
-        long memoryAfter = GC.GetTotalMemory(true);
+        Console.WriteLine(root.OuterHTML().Substring(0, 2003));
 
-        Console.WriteLine($"Пам'ять з щаблоном легковаговик: {memoryAfter - memoryBefore} байт\n");
-
-        Console.WriteLine(root.OuterHTML().Substring(0, 2000));
-
-        Console.WriteLine(new string('-', 50));
-
-        Console.WriteLine("Конвертування змісту книжки у HTML формат\nбез використання щаблону легковаговик");
-        Console.WriteLine(new string('-', 50));
-
-        GC.Collect();
-
-        long memoryBefore2 = GC.GetTotalMemory(true);
-
-        var factory2 = new LightElementFactory();
-        var root2 = new LightElementNode("div", DisplayType.Block, ClosingType.Normal);
-
-        string[] lines2 = bookText.Split("\n");
-
-        for (int i = 0; i < lines.Length; i++)
-        {
-            string line = lines[i].Trim();
-
-            if (string.IsNullOrEmpty(line)) continue;
-
-            LightElementNode node2;
-
-            if (i == 0)
-            {
-                node2 = new LightElementNode("h1", DisplayType.Block, ClosingType.Normal);
-            }
-            else if (line.Length < 20)
-            {
-                node2 = new LightElementNode("h2", DisplayType.Block, ClosingType.Normal);
-            }
-            else if (char.IsWhiteSpace(lines[i][0]))
-            {
-                node2 = new LightElementNode("blockquote", DisplayType.Block, ClosingType.Normal);
-            }
-            else
-            {
-                node2 = new LightElementNode("p", DisplayType.Block, ClosingType.Normal);
-            }
-
-            node2.TextContent(new LightTextNode(line));
-            root2.AppendChild(node2);
-        }
-
-        long memoryAfter2 = GC.GetTotalMemory(true);
-
-        Console.WriteLine($"Пам'ять без щаблону легковаговик: {memoryAfter2 - memoryBefore2} байт\n");
-
-        Console.WriteLine(root.OuterHTML().Substring(0, 2000));
+        BenchmarkRunner.Run<FlyweightBecnhmark>();
 
         Console.WriteLine(new string('-', 50));
     }

@@ -13,5 +13,7 @@ namespace ClassLibraryStructurePatterns.Decorator.Inventory
 
         public virtual string GetDescription() => _character.GetDescription();
         public virtual int GetAttack() => _character.GetAttack();
+        public virtual int GetDefence() => _character.GetDefence();
+        public virtual int GetMagic() => _character.GetMagic();
     }
 }

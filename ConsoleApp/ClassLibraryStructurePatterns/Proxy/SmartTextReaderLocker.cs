@@ -15,10 +15,12 @@ namespace ClassLibraryStructurePatterns.Proxy
 
         public char[][] ReadFile(string path)
         {
+            var nullArr = new char[0][];
+
             if (Regex.IsMatch(path, _pattern))
             {
                 Console.WriteLine("Access denied!");
-                return new char[0][];
+                return nullArr;
             }
 
             char[][] result = _reader.ReadFile(path);

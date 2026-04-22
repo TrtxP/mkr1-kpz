@@ -4,11 +4,11 @@ namespace ClassLibraryStructurePatterns.Flyweight
 {
     public class LightElementFactory
     {
-        private readonly Dictionary<string, LightElementInfo> _flyweights = new Dictionary<string, LightElementInfo>();
+        private readonly Dictionary<(string, DisplayType, ClosingType), LightElementInfo> _flyweights = new();
 
         public LightElementInfo GetElementInfo(string tagName, DisplayType display, ClosingType closing)
         {
-            string key = $"{tagName}_{display}_{closing}";
+            var key = (tagName, display, closing);
 
             if (!_flyweights.ContainsKey(key))
             {

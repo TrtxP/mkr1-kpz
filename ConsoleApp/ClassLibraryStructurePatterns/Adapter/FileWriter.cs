@@ -7,6 +7,7 @@
             using (var writer = new StreamWriter(path, true))
             {
                 writer.Write(content);
+                Console.WriteLine(content);
             }
         }
 
@@ -15,6 +16,7 @@
             using (var writer = new StreamWriter(path, true))
             {
                 writer.WriteLine(content);
+                Console.WriteLine(content);
             }
         }
     }

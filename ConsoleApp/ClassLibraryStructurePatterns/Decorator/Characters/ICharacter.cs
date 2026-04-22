@@ -4,5 +4,7 @@
     {
         string GetDescription();
         int GetAttack();
+        int GetDefence();
+        int GetMagic();
     }
 }

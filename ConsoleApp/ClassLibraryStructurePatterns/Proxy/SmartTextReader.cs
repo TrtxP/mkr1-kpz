@@ -6,10 +6,12 @@
         {
             path = Path.GetFullPath(path);
 
+            var nullArr = new char[0][];
+
             if (!File.Exists(path))
             {
                 Console.WriteLine("File not found");
-                return new char[0][];
+                return nullArr;
             }
 
             string[] lines = File.ReadAllLines(path);

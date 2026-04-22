@@ -1,4 +1,5 @@
-﻿using ClassLibraryStructurePatterns.Composite.Enums;
+﻿using ClassLibraryStructurePatterns.Composite.Classes;
+using ClassLibraryStructurePatterns.Composite.Enums;
 
 namespace ClassLibraryStructurePatterns.Flyweight
 {
