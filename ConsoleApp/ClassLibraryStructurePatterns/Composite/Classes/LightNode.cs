@@ -30,5 +30,7 @@ namespace ClassLibraryStructurePatterns.Composite.Classes
             OnTextRendered();
             return result;
         }
+
+        public abstract void Accept(IVisitor visitor);
     }
 }
