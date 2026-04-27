@@ -1,4 +1,6 @@
-﻿namespace ClassLibraryStructurePatterns.Composite.Classes
+﻿using ClassLibraryStructurePatterns.Composite.Classes;
+
+namespace ClassLibraryStructurePatterns.Composite
 {
     public interface IVisitor
     {
