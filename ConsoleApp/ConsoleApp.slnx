@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="../../lab4/ConsoleApp/ClassLibraryBehavioralPatterns/ClassLibraryBehavioralPatterns.csproj" />
+  <Project Path="ClassLibraryStructurePatterns/ClassLibraryStructurePatterns.csproj" />
+  <Project Path="ConsoleApp/ConsoleApp.csproj" />
+</Solution>
