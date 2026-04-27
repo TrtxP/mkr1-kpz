@@ -5,11 +5,11 @@ namespace ClassLibraryStructurePatterns.Composite.Classes
 {
     public class LightElementNode : LightNode
     {
-        private string _tagName;
+        protected string _tagName;
         private DisplayType _displayType;
         private ClosingType _closingType;
         private List<string> _cssClasses = new List<string>();
-        private List<LightNode> _children = new List<LightNode>();
+        internal List<LightNode> _children = new List<LightNode>();
 
         public LightElementNode(string tagName, DisplayType displayType, ClosingType closingType)
         {
@@ -79,6 +79,16 @@ namespace ClassLibraryStructurePatterns.Composite.Classes
             {
                 _children.Add(elementNode);
             }
+        }
+
+        public void Click()
+        {
+            DispatchEvent("click");
+        }
+
+        public void MouseOver()
+        {
+            DispatchEvent("mouseover");
         }
     }
 }

@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\lab4\ConsoleApp\ClassLibraryBehavioralPatterns\ClassLibraryBehavioralPatterns.csproj" />
     <ProjectReference Include="..\ClassLibraryStructurePatterns\ClassLibraryStructurePatterns.csproj" />
   </ItemGroup>
 

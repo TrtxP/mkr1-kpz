@@ -7,3 +7,10 @@ This project includes all types of structural patterns:
 - Proxy
 - Composite
 - Flyweight
+
+And also includes the connection with library of behavioral patterns:
+- Iterator
+- Command
+- State
+- Template Method
+- Visitor

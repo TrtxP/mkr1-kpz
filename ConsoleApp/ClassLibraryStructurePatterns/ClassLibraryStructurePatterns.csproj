@@ -11,4 +11,8 @@
     <PackageReference Include="Microsoft.VisualStudio.DiagnosticsHub.BenchmarkDotNetDiagnosers" Version="18.7.37220.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\lab4\ConsoleApp\ClassLibraryBehavioralPatterns\ClassLibraryBehavioralPatterns.csproj" />
+  </ItemGroup>
+
 </Project>
