@@ -11,11 +11,26 @@ namespace ClassLibraryStructurePatterns.Composite.Classes
         private List<string> _cssClasses = new List<string>();
         internal List<LightNode> _children = new List<LightNode>();
 
+        private IState _state = new NormalState();
+
         public LightElementNode(string tagName, DisplayType displayType, ClosingType closingType)
         {
             _tagName = tagName;
             _displayType = displayType;
             _closingType = closingType;
+        }
+
+        public void SetState(IState state)
+        {
+            _state = state;
+        }
+
+        public string Render()
+        {
+            OnBeforeRender();
+            string result = _state.Render(this);
+            OnAfterRender();
+            return result;
         }
 
         public override string InnerHTML()
@@ -105,6 +120,16 @@ namespace ClassLibraryStructurePatterns.Composite.Classes
         public void MouseOver()
         {
             DispatchEvent("mouseover");
+        }
+
+        protected void OnBeforeRender()
+        {
+            Console.WriteLine($"[Lifesycle] Початок рендерингу елемента <{_tagName}>");
+        }
+
+        protected void OnAfterRender()
+        {
+            Console.WriteLine($"[Lifesycle] Завершення рендерингу елемента <{_tagName}>");
         }
     }
 }
