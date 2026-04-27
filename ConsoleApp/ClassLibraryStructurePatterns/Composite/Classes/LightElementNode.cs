@@ -25,7 +25,7 @@ namespace ClassLibraryStructurePatterns.Composite.Classes
             _state = state;
         }
 
-        public string Render()
+        protected override string PerformRender()
         {
             OnBeforeRender();
             string result = _state.Render(this);
@@ -130,6 +130,36 @@ namespace ClassLibraryStructurePatterns.Composite.Classes
         protected void OnAfterRender()
         {
             Console.WriteLine($"[Lifesycle] Завершення рендерингу елемента <{_tagName}>");
+        }
+
+        protected override void OnCreated()
+        {
+            Console.WriteLine($"[Lifesycle] Елемент <{_tagName}> створено");
+        }
+
+        protected override void OnInserted()
+        {
+            Console.WriteLine($"[Lifesycle] Елемент <{_tagName}> вставлено в DOM");
+        }
+
+        protected override void OnRemoved()
+        {
+            Console.WriteLine($"[Lifesycle] Елемент <{_tagName}> видалено з DOM");
+        }
+
+        protected override void OnStylesApplied()
+        {
+            Console.WriteLine($"[Lifesycle] Стилі застосовано до елемента <{_tagName}>");
+        }
+
+        protected override void OnClassListApplied()
+        {
+            Console.WriteLine($"[Lifesycle] Класи застосовано до елемента <{_tagName}>");
+        }
+
+        protected override void OnTextRendered()
+        {
+            Console.WriteLine($"[Lifesycle] Текст рендерено для елемента <{_tagName}>");
         }
     }
 }
