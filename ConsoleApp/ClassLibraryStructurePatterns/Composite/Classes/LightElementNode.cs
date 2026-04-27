@@ -89,6 +89,14 @@ namespace ClassLibraryStructurePatterns.Composite.Classes
             }
         }
 
+        public void RemoveChild(LightElementNode elementNode)
+        {
+            if (elementNode != null)
+            {
+                _children.Remove(elementNode);
+            }
+        }
+
         public void Click()
         {
             DispatchEvent("click");
