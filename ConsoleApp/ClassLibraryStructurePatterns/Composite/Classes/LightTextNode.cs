@@ -13,5 +13,10 @@
         public override string OuterHTML() => _text;
 
         protected override string PerformRender() => _text;
+
+        public override void Accept(IVisitor visitor)
+        {
+            visitor.VisitText(this);
+        }
     }
 }

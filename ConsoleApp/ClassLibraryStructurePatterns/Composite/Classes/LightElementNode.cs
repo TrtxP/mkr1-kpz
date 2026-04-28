@@ -161,5 +161,14 @@ namespace ClassLibraryStructurePatterns.Composite.Classes
         {
             Console.WriteLine($"[Lifesycle] Текст рендерено для елемента <{_tagName}>");
         }
+
+        public override void Accept(IVisitor visitor)
+        {
+            visitor.VisitElement(this);
+            foreach (var child in _children)
+            {
+                child.Accept(visitor);
+            }
+        }
     }
 }
