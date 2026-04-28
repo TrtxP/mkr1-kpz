@@ -65,6 +65,14 @@ namespace ClassLibraryStructurePatterns.Composite.Classes
             }
         }
 
+        public void RemoveClassName(string className)
+        {
+            if (!string.IsNullOrWhiteSpace(className))
+            {
+                _cssClasses.Remove(className);
+            }
+        }
+
         public void TextContent(LightTextNode textNode)
         {
             if (textNode != null)
@@ -78,6 +86,14 @@ namespace ClassLibraryStructurePatterns.Composite.Classes
             if (elementNode != null)
             {
                 _children.Add(elementNode);
+            }
+        }
+
+        public void RemoveChild(LightElementNode elementNode)
+        {
+            if (elementNode != null)
+            {
+                _children.Remove(elementNode);
             }
         }
 
