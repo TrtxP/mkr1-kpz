@@ -14,5 +14,21 @@ namespace ClassLibraryStructurePatterns.Composite.Classes
         }
 
         public IHTMLIterator<LightNode> CreateIterator() => CreateIterator(TraversalIterator.DepthFirst);
+
+        protected virtual void OnCreated() { }
+        protected virtual void OnInserted() { }
+        protected virtual void OnRemoved() { }
+        protected virtual void OnStylesApplied() { }
+        protected virtual void OnClassListApplied() { }
+        protected virtual void OnTextRendered() { }
+        protected abstract string PerformRender();
+
+        public string Render()
+        {
+            OnCreated();
+            string result = PerformRender();
+            OnTextRendered();
+            return result;
+        }
     }
 }
