@@ -1,4 +1,5 @@
-﻿using ClassLibraryStructurePatterns.Composite.Classes;
+﻿using ClassLibraryStructurePatterns.Composite;
+using ClassLibraryStructurePatterns.Composite.Classes;
 using ClassLibraryStructurePatterns.Composite.Enums;
 using System.Text;
 
@@ -13,6 +14,16 @@ namespace ClassLibraryStructurePatterns.Flyweight
         public LightElementNodeWithInfo(LightElementInfo info)
         {
             _info = info;
+        }
+
+        protected override string PerformRender()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Accept(IVisitor visitor)
+        {
+            throw new NotImplementedException();
         }
 
         public override string InnerHTML()
